@@ -1,0 +1,15 @@
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+
+# Vector database
+backend/data/vector_db/
+
+# IDE files
+.idea/
+
+# Ingestion output files
+ingest_debug_output.txt
+ingest_output.txt

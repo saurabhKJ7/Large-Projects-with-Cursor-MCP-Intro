@@ -1,0 +1,23 @@
+Documentation Link
+
+"https://docs.anthropic.com/en/home",
+"https://www.datacamp.com/tutorial/mcp-model-context-protocol",
+"https://www.philschmid.de/mcp-introduction",
+"https://pieces.app/blog/mcp",
+"https://wandb.ai/onlineinference/mcp/reports/The-Model-Context-Protocol-MCP-by-Anthropic-Origins-functionality-and-impact--VmlldzoxMTY5NDI4MQ",
+"https://stackoverflow.com/questions/tagged/model-context-protocol",
+"https://openai.github.io/openai-agents-python/mcp/",
+"https://www.infoq.com/news/2024/12/anthropic-model-context-protocol/",
+"https://devblogs.microsoft.com/blog/microsoft-partners-with-anthropic-to-create-official-c-sdk-for-model-context-protocol",
+"https://en.wikipedia.org/wiki/Model_Context_Protocol"
+
+Github Link
+
+"modelcontextprotocol/servers",
+"docker/mcp-servers",
+"wong2/awesome-mcp-servers",
+"appcypher/awesome-mcp-servers",
+"punkpeye/awesome-mcp-servers",
+"adhikasp/mcp-reddit",
+"gscalzo/stackoverflow-mcp",
+"Xyber-Labs/mcp-server-youtube"
