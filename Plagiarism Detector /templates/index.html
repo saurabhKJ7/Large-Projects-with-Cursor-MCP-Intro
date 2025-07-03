@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plagiarism Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #0056b3;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            min-height: 80px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .similarity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .similarity-table th, .similarity-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .similarity-table th {
+            background-color: #e9ecef;
+        }
+        .highlight-clone {
+            background-color: #ffe0b2; /* Light orange for highlighting */
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 15px;
+        }
+        .model-select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Plagiarism Detector - Semantic Similarity Analyzer</h1>
+
+        <form method="POST">
+            <div id="text-inputs">
+                {% for i in range(1, 6) %}
+                <div class="form-group">
+                    <label for="text{{ i }}">Text {{ i }}:</label>
+                    <textarea id="text{{ i }}" name="text{{ i }}">{{ texts[i-1] if texts and texts[i-1] is defined else '' }}</textarea>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="form-group">
+                <label for="model_select">Select Embedding Model:</label>
+                <select name="model_select" id="model_select" class="model-select">
+                    {% for model in model_names %}
+                    <option value="{{ model }}" {% if model == selected_model %}selected{% endif %}>{{ model }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="threshold">Clone Detection Threshold (0.0 - 1.0, e.g., 0.8 for 80%):</label>
+                <input type="number" id="threshold" name="threshold" step="0.01" min="0" max="1" value="0.8" class="model-select">
+            </div>
+
+            <button type="submit">Analyze Plagiarism</button>
+        </form>
+
+        {% if error_message %}
+            <p class="error-message">Error: {{ error_message }}</p>
+        {% endif %}
+
+        {% if similarity_matrix is not none and similarity_matrix.shape[0] > 0 %}
+            <h2>Similarity Matrix</h2>
+            <table class="similarity-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        {% for i in range(display_texts|length) %}
+                        <th>Text {{ i+1 }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(display_texts|length) %}
+                    <tr>
+                        <th>Text {{ i+1 }}</th>
+                        {% for j in range(display_texts|length) %}
+                        <td {% if highlight_pairs and ((i, j) in highlight_pairs or (j, i) in highlight_pairs) %}class="highlight-clone"{% endif %}>
+                            {% if i == j %}
+                                100.00%
+                            {% else %}
+                                {{ "%.2f" % (similarity_matrix[i][j] * 100) }}%
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if clone_pairs %}
+                <h2>Potential Clones (Similarity > {{ "%.0f" % (request.form.get('threshold', 0.8)|float * 100) }}%)</h2>
+                <ul>
+                    {% for i, j, sim in clone_pairs %}
+                        <li>Text {{ i+1 }} and Text {{ j+1 }} (Similarity: {{ "%.2f" % (sim * 100) }}%)</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No potential clones detected above the threshold.</p>
+            {% endif %}
+
+        {% elif similarity_matrix is not none and similarity_matrix.shape[0] == 0 and not error_message %}
+            <p>No valid texts were provided for comparison.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

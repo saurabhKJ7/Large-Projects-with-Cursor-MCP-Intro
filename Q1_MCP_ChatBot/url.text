@@ -11,13 +11,3 @@ Documentation Link
 "https://devblogs.microsoft.com/blog/microsoft-partners-with-anthropic-to-create-official-c-sdk-for-model-context-protocol",
 "https://en.wikipedia.org/wiki/Model_Context_Protocol"
 
-Github Link
-
-"modelcontextprotocol/servers",
-"docker/mcp-servers",
-"wong2/awesome-mcp-servers",
-"appcypher/awesome-mcp-servers",
-"punkpeye/awesome-mcp-servers",
-"adhikasp/mcp-reddit",
-"gscalzo/stackoverflow-mcp",
-"Xyber-Labs/mcp-server-youtube"

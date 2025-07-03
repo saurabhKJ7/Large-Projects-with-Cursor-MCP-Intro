@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id              String           @id @default(uuid())
+  email           String           @unique
+  password        String
+  name            String
+  resetToken      String?
+  resetTokenExpiry DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  preferences     UserPreference[]
+  recommendations Recommendation[]
+  interactions    Interaction[]
+
+  @@index([email])
+  @@index([resetToken])
+}
+
+model Product {
+  id              String           @id @default(uuid())
+  productId       Int              @unique
+  productName     String
+  category        String
+  subcategory     String
+  price           Float
+  quantityInStock Int
+  manufacturer    String
+  description     String
+  weight          Float
+  dimensions      String
+  releaseDate     DateTime
+  rating          Float
+  isFeatured      Boolean
+  isOnSale        Boolean
+  salePrice       Float?
+  imageUrl        String
+  features        String          // Changed from Json to String for SQLite compatibility
+  similarityVector String         // Changed from Float[] to String for SQLite compatibility
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  interactions    Interaction[]
+  recommendations Recommendation[]
+
+  @@index([category, subcategory])
+  @@index([manufacturer])
+  @@index([isOnSale, isFeatured])
+  @@index([releaseDate])
+  @@index([rating])
+  @@index([price])
+}
+
+model Interaction {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  type      String   // view, like, purchase
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+
+  @@index([userId, productId])
+  @@index([type, createdAt])
+  @@index([createdAt])
+}
+
+model UserPreference {
+  id        String   @id @default(uuid())
+  userId    String
+  category  String
+  weight    Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId, category])
+  @@index([category, weight])
+}
+
+model Recommendation {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  score     Float
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+
+  @@index([userId, score])
+  @@index([productId, score])
+  @@index([createdAt])
+} 
