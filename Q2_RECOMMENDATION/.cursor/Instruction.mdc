@@ -1,5 +1,72 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: false
 ---
+# AI Product Recommendation System - Optimized Rules
+
+## Project Architecture
+Full-stack TypeScript app: React frontend + Node.js/Express backend + PostgreSQL + Prisma ORM
+
+## Tech Stack (STRICT - No Alternatives)
+- Frontend: React 18, TypeScript, Tailwind CSS, React Query, React Hook Form
+- Backend: Node.js, Express, TypeScript, Prisma, bcrypt, jsonwebtoken
+- Database: PostgreSQL only
+- AI: Simple algorithms (cosine similarity, collaborative filtering) - NO external ML libraries
+- Testing: Jest, React Testing Library
+
+## Code Standards (MANDATORY)
+- TypeScript strict mode everywhere
+- All functions must have proper error handling (try-catch)
+- All inputs must be validated (Zod validation library)
+- All API responses: { success: boolean, data?: any, error?: string }
+- Async/await only (no .then())
+- JSDoc comments for all functions
+
+## File Structure (EXACT)
+project/
+├── frontend/src/
+│   ├── components/
+│   ├── pages/
+│   ├── hooks/
+│   ├── services/
+│   └── types/
+├── backend/src/
+│   ├── controllers/
+│   ├── routes/
+│   ├── middleware/
+│   ├── services/
+│   └── utils/
+└── shared/types/
+
+## Database Schema (Required Tables)
+- users: id, email, password_hash, preferences, created_at
+- products: id, name, category, price, description, rating, features
+- user_interactions: id, user_id, product_id, type, timestamp
+- recommendations: id, user_id, product_id, score, created_at
+
+## Security Requirements
+- Hash passwords with bcrypt (12 rounds)
+- JWT tokens with 24h expiry
+- Input validation on all endpoints
+- Rate limiting on auth routes
+- CORS configuration
+
+## Algorithm Requirements
+- Content-based: cosine similarity on product features
+- Collaborative: user-item matrix with similarity scores
+- Hybrid: weighted combination (70% collaborative, 30% content)
+- Cold start: popular items for new users
+
+## Error Handling
+- Global error middleware for Express
+- All database operations in try-catch
+- Meaningful error messages for users
+- Proper HTTP status codes
+
+## Performance
+- Database indexes on user_id, product_id
+- Pagination for all lists (limit 20)
+- Basic caching for recommendations (30 min)
+
+ALWAYS follow these rules. Never suggest alternatives or ask for preferences.

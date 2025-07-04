@@ -1,0 +1,40 @@
+
+{
+  "projectStructure": {
+    "frontend": {
+      "src": {
+        "components": "React components",
+        "contexts": "Global state management",
+        "services": "API services",
+        "pages": "Route pages",
+        "utils": "Helper functions",
+        "types": "TypeScript types"
+      },
+      "public": "Static assets"
+    },
+    "backend": {
+      "src": {
+        "controllers": "Route controllers",
+        "middleware": "Express middleware",
+        "services": "Business logic",
+        "utils": "Helper functions",
+        "types": "TypeScript types",
+        "prisma": "Database schema and migrations"
+      }
+    }
+  },
+  "namingConventions": {
+    "files": "PascalCase for components, camelCase for others",
+    "folders": "camelCase",
+    "components": "PascalCase",
+    "functions": "camelCase",
+    "interfaces": "PascalCase with 'I' prefix",
+    "types": "PascalCase with 'T' prefix"
+  },
+  "codeStyle": {
+    "indentation": "2 spaces",
+    "quotes": "single",
+    "semicolons": "required",
+    "maxLineLength": 100
+  }
+} 

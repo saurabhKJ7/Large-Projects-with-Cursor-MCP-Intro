@@ -1,4 +1,0 @@
-flask
-nltk
-textstat
-scikit-learn

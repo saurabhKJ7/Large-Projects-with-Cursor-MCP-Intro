@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # MCP Server service
+  mcp-server:
+    build: .
+    container_name: document-analyzer-mcp
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "8000:8000"
+    command: "mcp"
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  # Web App service
+  web-app:
+    build: .
+    container_name: document-analyzer-web
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "5000:5000"
+    command: "web"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - FLASK_ENV=production
+    restart: unless-stopped
+    depends_on:
+      - mcp-server

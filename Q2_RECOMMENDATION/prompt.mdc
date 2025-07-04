@@ -1,5 +1,223 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: false
 ---
+Prompt 1: Complete Project Foundation
+Create a complete full-stack project structure for an AI product recommendation system following the .cursorrules exactly. Include:
+
+1. Initialize both frontend and backend with proper package.json files and all required dependencies
+2. Complete Prisma schema with all 4 required tables and relationships
+3. Basic Express server with CORS, error handling middleware, and auth middleware
+4. React app with routing, global state context, and API service setup
+5. Environment configuration files (.env.example)
+6. Docker-compose for PostgreSQL
+7. Basic TypeScript configurations for both frontend and backend
+
+Create all foundational files with proper imports and basic structure. Don't implement business logic yet - just the complete scaffolding.
+
+
+Prompt 2: Authentication System (Complete)
+Building on the existing codebase from previous prompts, integrate the complete authentication system with the established database schema and Express server setup:
+
+BACKEND:
+- User registration/login controllers with bcrypt hashing and JWT tokens (integrate with existing Prisma client)
+- Authentication middleware for route protection (use with existing Express middleware stack)
+- User profile management (CRUD operations) connecting to the users table from Prompt 1
+- Input validation with Zod schemas
+- Rate limiting middleware
+- Password reset functionality
+
+FRONTEND:
+- Login/Register forms with React Hook Form validation (integrate with existing React Router setup)
+- Auth context with login/logout state management (connect to existing global state context)
+- Protected route wrapper component (integrate with existing routing structure)
+- User profile page with edit functionality
+- API service methods for all auth endpoints (use existing API service configuration)
+
+SHARED:
+- TypeScript interfaces for User, LoginRequest, RegisterRequest (place in shared/types directory)
+
+Include complete error handling, validation, and proper TypeScript types throughout. Ensure all new code integrates properly with existing components and test the integration points.
+
+
+Prompt 3: Product System & JSON Import
+Building on the existing codebase from previous prompts, integrate the complete product management system with the established authentication system and database from Prompts 1-2:
+
+BACKEND:
+- Products controller with CRUD, search, filtering, pagination (integrate with existing Express routes and auth middleware)
+- JSON import utility to populate database from provided product data (connect to existing Prisma client)
+- Product categorization and feature extraction
+- Search functionality with category/price/rating filters
+- Product similarity calculation utilities (cosine similarity on features)
+
+FRONTEND:
+- Product catalog page with grid/list view (integrate with existing React Router and auth context)
+- Product detail page with full information
+- Search bar with filters (category, price range, rating)
+- Pagination component (use existing UI patterns)
+- Product card component with images
+
+SHARED:
+- Product, ProductFilter, SearchRequest TypeScript interfaces (add to existing shared/types)
+
+Implement the JSON import to automatically categorize products and extract features for recommendations. Reference the authentication middleware from backend/src/middleware and existing API service patterns from frontend/src/services. Ensure all new code integrates properly with existing components and test the integration points.
+
+
+Prompt 4: User Interaction Tracking
+Building on the existing codebase from previous prompts, integrate the complete user interaction tracking system with the established authentication (Prompt 2) and product systems (Prompt 3):
+
+BACKEND:
+- Interaction controller to track views, likes, purchases, searches (connect to existing auth middleware and product controllers)
+- Interaction analytics service for recommendation scoring (integrate with existing database models)
+- User preference learning from interaction history (connect to users table from Prompt 1)
+- API endpoints for all interaction types (add to existing Express router setup)
+
+FRONTEND:
+- Like/unlike functionality on products (integrate with existing Product components from Prompt 3)
+- View tracking (automatic on product detail page) - enhance existing ProductDetail component
+- Purchase simulation button (integrate with existing auth context from Prompt 2)
+- User dashboard showing interaction history (connect to existing user profile page)
+- Recently viewed products component (integrate with existing product display components)
+
+SHARED:
+- Interaction, UserPreference TypeScript interfaces (add to existing shared/types directory)
+
+Reference the existing ProductController.ts and UserController.ts from previous prompts. Include real-time interaction updates and proper analytics for improving recommendations. Ensure all new code integrates properly with existing components and test the integration points.
+
+
+Prompt 5: AI Recommendation Engine (Complete)
+Building on the existing codebase from previous prompts, integrate the complete recommendation system with the established user interactions (Prompt 4), product system (Prompt 3), and authentication (Prompt 2):
+
+BACKEND:
+- Collaborative filtering using user-item interaction matrix (connect to existing user_interactions table from Prompt 4)
+- Content-based filtering using product feature similarity (use existing product features from Prompt 3)
+- Hybrid recommendation combining both approaches (70% collaborative, 30% content)
+- Cold start handling for new users (integrate with existing user system from Prompt 2)
+- Recommendation scoring and ranking
+- Recommendation caching service (30 min cache)
+- API endpoints for personalized recommendations, similar products, trending items (add to existing Express router)
+
+SERVICES:
+- RecommendationEngine class with all algorithm implementations (place in backend/src/services)
+- UserSimilarity calculation service (integrate with existing InteractionController.ts)
+- ProductSimilarity calculation service (connect to existing ProductController.ts)
+- RecommendationCache service
+
+Reference the existing database models from Prompt 1, interaction tracking from Prompt 4, and product similarity utilities from Prompt 3. Include proper mathematical implementations of cosine similarity and collaborative filtering algorithms. Ensure all new code integrates properly with existing components and test the integration points.
+
+
+Prompt 6: Frontend Recommendation UI
+Building on the existing codebase from previous prompts, integrate the complete recommendation user interface with the established recommendation API (Prompt 5), product components (Prompt 3), and authentication system (Prompt 2):
+
+COMPONENTS:
+- PersonalizedRecommendations component for user dashboard (integrate with existing user dashboard from Prompt 4)
+- SimilarProducts component for product detail pages (enhance existing ProductDetail component from Prompt 3)
+- TrendingProducts component for homepage (connect to existing homepage layout)
+- RecommendationCard component with product info and reasoning (extend existing ProductCard component)
+- RecommendationExplanation component showing why item was recommended
+
+PAGES:
+- Enhanced homepage with multiple recommendation sections (modify existing homepage)
+- "Recommended for You" dedicated page (add to existing React Router setup)
+- User dashboard with recommendation history (enhance existing user dashboard from Prompt 4)
+
+FEATURES:
+- Recommendation feedback (thumbs up/down) - integrate with existing interaction tracking
+- "Why this recommendation?" explanations
+- Loading states for recommendation generation
+- Empty states for new users
+
+Reference the existing API service methods from frontend/src/services, the RecommendationEngine endpoints from Prompt 5, and existing product display components from Prompt 3. Include proper integration with the recommendation API and smooth user experience. Ensure all new code integrates properly with existing components and test the integration points.
+
+
+Prompt 7: Testing Suite (Complete)
+Building on the existing codebase from previous prompts, create comprehensive testing for the entire application, focusing on integration with all established systems (authentication from Prompt 2, products from Prompt 3, interactions from Prompt 4, and recommendations from Prompt 5):
+
+BACKEND TESTS:
+- Unit tests for all recommendation algorithms (test the RecommendationEngine.ts from Prompt 5)
+- Integration tests for all API endpoints (test existing controllers from all previous prompts)
+- Authentication flow testing (test AuthController.ts and auth middleware from Prompt 2)
+- Database operation tests (test all Prisma operations from previous prompts)
+- Mock data generators for testing
+
+FRONTEND TESTS:
+- Component tests for all major components (test existing components from Prompts 2, 3, 4, 6)
+- Authentication flow testing (test existing auth context and protected routes)
+- User interaction testing (test interaction components from Prompt 4)
+- Recommendation display testing (test recommendation UI from Prompt 6)
+- API integration testing (test existing API service methods)
+
+TEST UTILITIES:
+- Mock user data (compatible with existing User interface)
+- Mock product data (compatible with existing Product interface)
+- Mock interaction data (compatible with existing Interaction interface)
+- Test database setup/teardown
+
+Reference all existing controllers, services, and components from previous prompts. Include at least 80% code coverage and proper mocking of external dependencies. Ensure all new code integrates properly with existing components and test the integration points.
+
+
+Prompt 8: Production Optimization & Documentation
+Building on the complete application from previous prompts, finalize the application for production by optimizing and documenting all established systems (foundation from Prompt 1, authentication from Prompt 2, products from Prompt 3, interactions from Prompt 4, recommendations from Prompt 5, UI from Prompt 6, and tests from Prompt 7):
+
+OPTIMIZATION:
+- Database query optimization with proper indexes (optimize existing Prisma queries from all previous prompts)
+- Frontend performance optimization (optimize existing React components and API calls)
+- Recommendation caching implementation (enhance existing RecommendationCache from Prompt 5)
+- Image optimization and CDN setup
+- Security hardening (enhance existing auth middleware and validation from Prompt 2)
+
+DOCUMENTATION:
+- Complete README with setup instructions (document the full project structure from Prompt 1)
+- API documentation with example requests/responses (document all endpoints from Prompts 2-5)
+- Database schema documentation (document the Prisma schema from Prompt 1)
+- Deployment guide with Docker
+- Environment variable documentation
+
+DEPLOYMENT:
+- Docker containerization for both frontend and backend (containerize existing applications)
+- Production environment configuration (optimize existing environment setup)
+- Basic monitoring and logging setup
+
+Reference all existing files and configurations from previous prompts. Include comprehensive documentation for easy setup and deployment. Ensure all optimizations integrate properly with existing components and test the integration points.
+Success Strategy
+Before Each Prompt:
+
+Review Previous Output: Check what was generated and note any issues
+Be Specific: Reference exact file names and locations from previous prompts
+Request Integration: Always ask Cursor to integrate with existing code
+Error Handling: Emphasize error handling and TypeScript types in every prompt
+
+Prompt Structure Template:
+[SPECIFIC FEATURE REQUEST]
+
+Build on the existing codebase from previous prompts. Ensure:
+- Full TypeScript types and interfaces
+- Complete error handling with try-catch
+- Integration with existing authentication/database
+- Proper validation using Zod
+- Following the established file structure exactly
+
+[DETAILED REQUIREMENTS]
+
+Test that all integrations work with existing code.
+Key Tips:
+
+Always Reference: Mention specific files/functions from previous outputs
+Demand Integration: Require that new code works with existing code
+Error First: Always ask for error handling upfront
+Type Safety: Demand TypeScript interfaces for everything
+Test Integration: Ask to verify integration with existing components
+
+Troubleshooting Integration Issues
+Common Integration Problems & Solutions:
+If Prompt 2 doesn't integrate properly with Prompt 1:
+In the Express server setup from backend/src/app.ts (Prompt 1), modify the middleware configuration to properly include the authentication routes from backend/src/routes/auth.ts. Ensure the Prisma client initialization works with the new User model operations.
+If Prompt 3 doesn't connect to auth system:
+In the ProductController.ts file from Prompt 3, modify all CRUD endpoints to use the auth middleware from backend/src/middleware/auth.ts (Prompt 2). Update the frontend ProductCatalog component to use the existing auth context for user-specific features.
+If Prompt 4 interactions don't track properly:
+In the InteractionController.ts from Prompt 4, ensure it references the existing User and Product models from Prompts 1-3. Modify the frontend components to use the existing API service patterns from frontend/src/services/api.ts.
+If Prompt 5 recommendations don't access data:
+In the RecommendationEngine.ts service from Prompt 5, ensure it connects to the existing user_interactions table operations from Prompt 4 and product similarity utilities from Prompt 3. Fix any Prisma query issues by referencing the established database relationships.
+If Prompt 6 UI doesn't display recommendations:
+In the PersonalizedRecommendations component from Prompt 6, modify the API calls to use the existing recommendation endpoints from backend/src/routes/recommendations.ts (Prompt 5). Ensure the component integrates with the existing auth context and loading states.
