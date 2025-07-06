@@ -1,0 +1,50 @@
+[
+    {
+        "text": "Apple unveils new MacBook Pro with M2 chip, promising unprecedented performance in AI and machine learning tasks. The new device features enhanced neural engine capabilities.",
+        "category": "Tech"
+    },
+    {
+        "text": "Google's latest AI breakthrough in quantum computing shows potential for revolutionizing drug discovery and climate modeling. Researchers demonstrate quantum supremacy.",
+        "category": "Tech"
+    },
+    {
+        "text": "Federal Reserve raises interest rates by 25 basis points amid inflation concerns. Markets respond positively as Fed signals potential pause in rate hikes.",
+        "category": "Finance"
+    },
+    {
+        "text": "Bitcoin surges past $50,000 as institutional investors increase cryptocurrency holdings. Major banks announce plans for digital asset services.",
+        "category": "Finance"
+    },
+    {
+        "text": "Breakthrough in CRISPR gene therapy shows promise in treating rare genetic disorders. Clinical trials demonstrate significant improvement in patient outcomes.",
+        "category": "Healthcare"
+    },
+    {
+        "text": "New study reveals potential link between gut microbiome and mental health. Researchers identify specific bacterial strains associated with reduced anxiety.",
+        "category": "Healthcare"
+    },
+    {
+        "text": "Manchester United clinches Premier League title in dramatic final day showdown. Last-minute goal secures first championship in a decade.",
+        "category": "Sports"
+    },
+    {
+        "text": "NBA superstar breaks scoring record in playoff game, leading team to conference finals. Historic performance includes 12 three-pointers.",
+        "category": "Sports"
+    },
+    {
+        "text": "Senate passes landmark climate change legislation with bipartisan support. Bill includes major investments in renewable energy infrastructure.",
+        "category": "Politics"
+    },
+    {
+        "text": "Presidential candidates clash in final debate before election. Key issues include healthcare reform and foreign policy.",
+        "category": "Politics"
+    },
+    {
+        "text": "New superhero movie breaks opening weekend box office records. Critics praise groundbreaking special effects and emotional storyline.",
+        "category": "Entertainment"
+    },
+    {
+        "text": "Popular streaming series wins multiple Emmy awards. Show creator announces plans for anticipated third season.",
+        "category": "Entertainment"
+    }
+] 
